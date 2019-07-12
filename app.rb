@@ -26,6 +26,11 @@ class Battle < Sinatra::Base
     erb :play
   end
 
+  get '/play-two' do
+    @game = $game
+    erb :play_two
+  end
+
   get '/attack' do
     @game = $game
     @game.attack(@game.player_2)
@@ -34,6 +39,12 @@ class Battle < Sinatra::Base
     # @player1points = @player_1.hit_points
     #@player_2.deduct    #session[:player_2]
     erb :attack
+  end
+
+  get '/attack-two' do
+    @game = $game
+    @game.attack(@game.player_1)
+    erb :attack_two
   end
 
   run! if app_file == $0

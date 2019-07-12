@@ -1,4 +1,3 @@
-
 <h1>Welcome to Battle, <%= @game.player_1.name %> & <%= @game.player_2.name %>!</h1>
 
 <body>
@@ -10,7 +9,7 @@
     <form action="/play-two">
     <input type="submit" value="Player 2">
     </form>
-    <%= @game.player_2.name %> HB points = <%= @game.player_2.hit_points %>
+<%= @game.player_2.name %> HB points = <%= @game.player_2.hit_points %>
     <br><br>
     <form action="/attack">
     <input style="height:50px;width:100px" type="submit" value="Attack!">
