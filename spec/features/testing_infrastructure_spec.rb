@@ -28,7 +28,6 @@ feature 'attack a player' do
   scenario 'player 1 attacks player 2' do
     sign_in_and_play
     click_button('Attack!')
-    save_and_open_page
     expect(page).to have_content "Bob attacked Dave"
   end
 end
@@ -45,12 +44,18 @@ end
 feature 'Enables players to switch turns' do
   scenario 'it switches from player 1 to player 2' do
     sign_in_and_play
-    click_button('Attack')
-    click_link('OK')
-    click_button('Switch turns')
-    click_button('Attack')
+    click_button('Player 2')
+    click_button('Attack!')
     click_link('OK')
     expect(page).to have_content "Bob HB points = 50"
   end
 end
 
+feature 'Ends the game when player 1 or player 2 hit points reach 0' do
+  scenario 'it ends the game' do
+    sign_in_and_play
+    reaching_zero_hit_points
+    expect(page).to have_content "Dave is dead! Bob Wins!"
+  end
+end
+ 

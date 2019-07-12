@@ -11,4 +11,8 @@ class Game
     @player.deduct
   end
 
+  def game_over?
+    @player_1.hit_points.zero? || @player_2.hit_points.zero?
+  end
+
 end

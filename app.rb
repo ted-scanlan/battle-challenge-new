@@ -34,17 +34,34 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game = $game
     @game.attack(@game.player_2)
-
     #@player_1.attack(@player_2)
     # @player1points = @player_1.hit_points
     #@player_2.deduct    #session[:player_2]
-    erb :attack
+    if @game.game_over?
+      redirect '/player-one-wins'
+    else
+      erb :attack
+    end
   end
 
   get '/attack-two' do
     @game = $game
     @game.attack(@game.player_1)
-    erb :attack_two
+    if @game.game_over?
+      redirect '/player-two-wins'
+    else
+      erb :attack_two
+    end
+  end
+  
+  get '/player-one-wins' do
+    @game = $game
+    erb :player_one_wins
+  end
+
+  get '/player-two-wins' do
+    @game = $game
+    erb :player_two_wins
   end
 
   run! if app_file == $0
