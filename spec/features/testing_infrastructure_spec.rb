@@ -34,6 +34,7 @@ feature 'attack a player' do
   scenario 'player 1 attacks player 2' do
     sign_in_and_play
     click_button('Attack!')
+    save_and_open_page
     expect(page).to have_content "Bob attacked Dave"
   end
 end
@@ -42,6 +43,7 @@ feature 'attack reduces oppenents hit points' do
   scenario 'player 1 attacks player 2' do
     sign_in_and_play
     click_button('Attack!')
+    click_link('OK')
     expect(page).to have_content "Dave HB points = 50"
   end
 end

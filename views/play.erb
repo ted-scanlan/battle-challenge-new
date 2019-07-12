@@ -1,12 +1,12 @@
 
-<h1>Welcome to Battle, <%= @player_1 %> & <%= @player_2 %>!</h1>
+<h1>Welcome to Battle, <%= @game.player_1.name %> & <%= @game.player_2.name %>!</h1>
 
 <body>
-<%= @player_1 %> HB points = <%= @player_1_points %>
+<%= @game.player_1.name %> HB points = <%= @game.player_1.hit_points %>
 <form action="/attack">
   <input type="submit" value="Attack!">
 </form>
-<%= @player_2 %> HB points = <%= @player_2_points %>
+<%= @game.player_2.name %> HB points = <%= @game.player_2.hit_points %>
 <!-- <input action="/attack" type="submit" value="Attack!"> -->
 
   </body>

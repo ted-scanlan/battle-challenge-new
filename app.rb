@@ -3,6 +3,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require './lib/player.rb'
+require './lib/game.rb'
 
 
 class Battle < Sinatra::Base
@@ -12,32 +13,28 @@ class Battle < Sinatra::Base
   end
 
   post '/names' do
-    $player_1 = Player.new(params[:player_1])
-    $player_2 = Player.new(params[:player_2])
-
-    # session[:player_1] = params[:player_1]
-    # session[:player_2] = params[:player_2]
+    player_1 = Player.new(params[:player_1])
+    player_2 = Player.new(params[:player_2])
+    $game = Game.new(player_1, player_2)
     redirect '/play'
-
   end
 
   get '/play' do
-    @player_1 = $player_1.name
-    @player_2 = $player_2.name
-
-    # @player_1 = session[:player_1]
-    # @player_2 = session[:player_2]
-    @player_1_points = 60
-    @player_2_points = 60
+    @game = $game
+    # @player_1_points = $game.player_1.hit_points
+    # @player_2_points = $game.player_2.hit_points
     erb :play
-
   end
 
   get '/attack' do
-    @player_1 = $player_1.name       #session[:player_1]
-    @player_2 = $player_2.name      #session[:player_2]
-    erb :attack
+    @game = $game
+    @game.attack(@game.player_2)
 
-end
+    #@player_1.attack(@player_2)
+    # @player1points = @player_1.hit_points
+    #@player_2.deduct    #session[:player_2]
+    erb :attack
+  end
+
   run! if app_file == $0
 end
